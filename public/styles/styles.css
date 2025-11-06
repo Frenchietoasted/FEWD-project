@@ -1,14 +1,106 @@
-.home-button{
-   
+body{
+    margin:0;
+    padding:0;
+    font-family:"Stack Sans Notch", sans-serif;
+    color:white;
 }
+
+
+/*home page CSS start*/
+#home-body{
+    margin:0;
+    padding:0;
+
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #0f0f0f, #111, #1f1f1f);
+    animation: gradient 10s ease infinite;
+    background-size: 400% 400%;
+}
+
+.home-content{
+    border:solid #999 5px;
+    border-radius: 4%;
+    width:120vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+    color:#ccc;
+}
+
+.home-content>h1{
+    margin-bottom: 0px;
+    font-size: 4rem;
+    border-bottom:solid red 2px;
+    width: fit-content;
+}
+
+.home-content>h3{
+    margin-top:5px;
+    padding:0 0 10px 0;
+    font-size: 1.5rem;
+}
+.home-content>div{
+    display: flex;
+    justify-content: space-around;
+    width:fit-content;
+    margin-bottom: 20px;
+}
+
+.home-button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin:20px 30px;
+    padding:20px;
+    width:20vh;
+    
+    border-radius: 2%;
+    transition: color 0.2s;
+}
+
+.home-button a,.home-button h3{
+    text-decoration: none;
+    color:white;
+    margin-bottom: 0px;
+}
+
 .home-icons{
     display:block;
-    height:auto;
-    width:200px;
-    fill:blue;
+    
+    width:90px;
+    fill:white;
     transition: width 0.3s;
 }
 
-.home-icons:hover{
-    width:300px;
+.home-button:hover{
+    background-color: white;
+
+    h3{
+    color:black;
+    }
+    .home-icons{
+        fill:black;
+        width:120px;
+    }
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 100%;
+	}
+	100% {
+		background-position: 50% 50%;
+	}
+}
+/*Home page CSS end*/
