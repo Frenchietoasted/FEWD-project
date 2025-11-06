@@ -1,0 +1,14 @@
+.home-button{
+   
+}
+.home-icons{
+    display:block;
+    height:auto;
+    width:200px;
+    fill:blue;
+    transition: width 0.3s;
+}
+
+.home-icons:hover{
+    width:300px;
+}
