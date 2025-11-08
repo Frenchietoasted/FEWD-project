@@ -1,8 +1,6 @@
 document.querySelectorAll('.parallax').forEach(layer => {
-    // parse speed once (or fallback to 0)
-    const speed = parseFloat(layer.getAttribute('data-speed'));
-    if (Number.isNaN(speed)) return;
-
+    // speed 
+    const speed = 3;
     // handler for pointer movement when hovering this layer
     function onPointerMove(event) {
         const clientX = event.clientX ?? (event.touches && event.touches[0] && event.touches[0].clientX) ?? (window.innerWidth / 2);
