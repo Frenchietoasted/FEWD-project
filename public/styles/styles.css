@@ -93,12 +93,12 @@ body {
 .home-button>button:hover {
 
     h3 {
-        color: black;
+        color: white;
         filter: drop-shadow(2px 4px 6px white);
     }
 
     .home-icons {
-        fill: black;
+        fill: white;
         width: 120px;
         filter: drop-shadow(2px 4px 6px white);
     }
