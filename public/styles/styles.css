@@ -140,61 +140,56 @@ body {
 }
 
 .checklist-content > ul > li {
-  margin-top: 2%;
-  padding: 0.5rem;
+  margin: 2% 0;
+  padding: 0.3rem;
   width: 100%;
 }
+
 .task {
-  display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  cursor: default;
+  padding: 0.3rem 1rem;
+  transition: color 0.3s;
+}
+
+.task:hover .task-text {
+  color: #777;
+}
+
+.task-text {
+  cursor: pointer;
   user-select: none;
 }
 
-/* Hide the browser's default checkbox */
-.task input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-
-/* On mouse-over, add a grey background color */
-.task:hover {
+.task-text.completed {
+  text-decoration: line-through;
   color: #777;
-  
 }
 
-.delete-row{
-    position: absolute;
-    top:0;
-    right:10%;
-    width: 25px;
-    height: 25px;
-    fill:red;
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  padding: 0;
 }
-.task > button {
-    position: absolute;
-    background-color: transparent;
-    border: none;
-    width: 30px;
-    cursor:pointer;
-    height: 30px;
-    right: 10%;
+
+.delete-row {
+  width: 25px;
+  height: 25px;
+  fill: red;
+  transition: fill 0.2s;
 }
-.task > button:hover{
-  .delete-row{
-    fill:white;
-  }
+
+.delete-btn:hover .delete-row {
+  fill: white;
 }
+
 .strike {
   text-decoration: line-through;
 }
