@@ -1,0 +1,181 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#calendar-body {
+    background: linear-gradient(180deg, #0f0f0f, #111, #4f1e21);
+    animation: redboom 10s alternate ease-in-out infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes redboom {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 50% 60%;
+    }
+
+    100% {
+        background-position: 60% 60%;
+    }
+}
+
+.calendar {
+    /*make the calendar bigger*/
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: 7px 7px 30px #6e1218,
+        -20px -20px 30px #ffffff;
+    padding: 20px;
+    width: calc(20vw + 10vh);
+}
+
+.calendar_header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.calendar_header th {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.calendar_grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar_day {
+    /*frosted glass effect*/
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 10px #ffffff,
+        inset -5px -5px 10px #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 18px;
+    color: #000000;
+    transition: all 0.2s ease;
+}
+
+.calendar_day:hover {
+    box-shadow: inset 2px 2px 5px #bebebe,
+        inset -2px -2px 5px #ffffff;
+    cursor: pointer;
+}
+
+/* weekday header styling */
+.calendar_day.weekday {
+    height: 36px;
+    font-size: 13px;
+    color: #7a7a7a;
+    background: transparent;
+    box-shadow: none;
+    cursor: default;
+}
+
+/* blank cells used for leading gaps */
+.calendar_day.blank {
+    background: transparent;
+    box-shadow: none;
+    cursor: default;
+}
+
+.calendar_day.day:hover {
+    transform: translateY(-4px);
+    box-shadow: 5px 5px 8px #6e1218, -8px -8px 18px #ffffff;
+}
+
+/* today highlight */
+.calendar_day.today {
+    background: linear-gradient(-75deg, #4a2527, #e9e9e9);
+    box-shadow: 5px 5px 8px #6e1218, -8px -8px 18px #ffffff;
+    font-weight: 700;
+    color: #333;
+}
+
+
+/* header buttons */
+.calendar .calendar_header [id="prev"],
+.calendar .calendar_header [id="next"] {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 6px 10px;
+    transition: all 0.2s ease;
+}
+
+.calendar .calendar_header [id="prev"]:hover,
+.calendar .calendar_header [id="next"]:hover {
+    box-shadow: 6px 6px 12px #6e1218, -6px -6px 12px #ffffff;
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+.calendar_day.day.event {
+    color: rgb(255, 0, 0);
+}
+
+.events #inputEvent {
+    /*place it at the bottom of the calendar*/
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    max-width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 10px #6e1218,
+        inset -5px -5px 10px #ffffff;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    outline: none;
+    display: none;
+}
+
+.events #inputEvent:focus {
+    box-shadow: inset 2px 2px 5px #6e1218,
+        inset -2px -2px 5px #ffffff;
+}
+
+.event_bubble {
+    text-align: center;
+    text-wrap: break-word pretty;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    width: max-content;
+    max-width: calc(15vw - 2vh);
+    box-shadow: 5px 5px 15px #6e1218,
+        -5px -5px 15px #ffffff;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #333;
+    z-index: 10;
+    transform: translateY(-70%);
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.calendar_day.day:hover .event_bubble {
+    display: block;
+}
+
+/* End of Neurmorphism calendar */

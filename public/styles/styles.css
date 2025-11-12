@@ -10,29 +10,27 @@ input::placeholder {
 }
 /*home page CSS start*/
 #home-body {
-  margin: 0;
-  padding: 0;
-
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(90deg, #0f0f0f, #111, #1f1f1f);
-  animation: gradient 10s ease infinite;
-  background-size: 400% 400%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #0f0f0f, #111, #4f1e21);
+    animation: gradient 10s alternate ease-in-out infinite;
+    background-size: 400% 400%;
 }
 
 .home-content {
-  border: solid #999 5px;
-  border-radius: 4%;
-  width: 120vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  text-align: center;
-  color: #ccc;
+    border: solid #0f0f0f 5px;
+    border-radius: 4%;
+    width: 120vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: white;
 }
 
 .home-content > h1,
@@ -111,9 +109,9 @@ input::placeholder {
     background-position: 0% 50%;
   }
 
-  50% {
-    background-position: 100% 100%;
-  }
+    50% {
+        background-position: 20% 60%;
+    }
 
   100% {
     background-position: 50% 50%;
@@ -121,4 +119,3 @@ input::placeholder {
 }
 
 /*Home page CSS end*/
-
