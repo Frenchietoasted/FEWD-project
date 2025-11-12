@@ -1,0 +1,190 @@
+
+/*checklist css start*/
+.checklist-body {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  background-color: black;
+  justify-content: start;
+}
+
+.checklist-body > h1 {
+  font-size: 3.5rem;
+}
+.checklist-body > h2 {
+  border: solid red;
+  border-width: 0 0 2px 0;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+.checklist-content > ul {
+  list-style: none;
+  margin-top: 10vh;
+  padding: 0;
+  border: solid red;
+  border-width: 2px 0;
+  width: 100vh;
+  overflow: visible;
+}
+
+.checklist-content > ul > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin: 2% 0;
+  padding: 0.3rem;
+  width: 100%;
+  border: solid white 2px;
+  box-sizing: border-box;
+  color: #ccc;
+  background-color: none;
+  transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+}
+
+.checklist-content > ul > li:hover {
+  color: black;
+  box-shadow: 10px 5px 5px white;
+  border-color: transparent;
+  background-color: #ccc;
+  transform: translateY(-1px);
+}
+
+.task {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+  cursor: default;
+  padding: 0.3rem 1rem;
+  transition: color 0.3s;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.task-text {
+  cursor: pointer;
+  user-select: none;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
+.delete-row {
+  width: 25px;
+  height: 25px;
+  fill: red;
+  transition: fill 0.2s;
+}
+
+.delete-btn:hover .delete-row {
+  fill: black;
+}
+
+.border-change {
+  border-color: white;
+}
+.checklist-content > ul > li.strike {
+  text-decoration: line-through;
+  border-color: black;
+}
+.checklist-content > ul > li.strike:hover {
+  color: red;
+  box-shadow: 10px 5px 5px white;
+  border-color: transparent;
+  background-color: #ccc;
+  transform: translateY(-1px);
+}
+
+.new-thing {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+#newTask {
+  height: 2.5rem;
+  padding: 0;
+  border: solid white;
+  border-width: 0 0 2px 0;
+  font-size: 1.5rem;
+  color: #ccc;
+  background-color: transparent;
+  transition: background-color 0.2s;
+  margin-bottom: 20px;
+}
+#newTask:focus {
+  outline: none;
+  border-color: red;
+}
+.new-thing > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.plus {
+  position: static;
+  top: 5%;
+  left: 5%;
+  width: 30px;
+  height: 30px;
+  fill: red;
+  rotate: 0deg;
+  transition: fill 0.2s, rotate 0.4s;
+}
+.plus:hover {
+  fill: white;
+  rotate: 90deg;
+}
+
+.checklist-body > header {
+  position: absolute;
+  left: 10%;
+  top: 5%;
+  width: calc(20vm+20vh);
+  border: solid white;
+  color: white;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.checklist-body > header > button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.arrow {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  transition: fill 0.2s;
+}
+
+.checklist-body > header:hover {
+  button {
+    color: black;
+    .arrow {
+      fill: black;
+    }
+  }
+  background-color: white;
+}
+/*checklist css end*/
