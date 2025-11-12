@@ -1,4 +1,13 @@
-
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Stack Sans Notch", sans-serif;
+  background-color: black;
+  color: white;
+}
+input::placeholder {
+  font-family: "Stack Sans Notch", sans-serif;
+}
 /*checklist css start*/
 .checklist-body {
   margin: 0;
