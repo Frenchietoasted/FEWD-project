@@ -153,6 +153,7 @@ input::placeholder {
   height: 30px;
   fill: red;
   rotate: 0deg;
+  transform:scale(1.2);
   transition: fill 0.2s, rotate 0.4s;
 }
 .plus:hover {
