@@ -10,27 +10,25 @@ body {
 #home-body {
     margin: 0;
     padding: 0;
-
     display: flex;
     flex-direction: column;
     height: 100vh;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(90deg, #0f0f0f, #111, #1f1f1f);
-    animation: gradient 10s ease infinite;
+    background: linear-gradient(180deg, #0f0f0f, #111, #4f1e21);
+    animation: gradient 10s alternate ease-in-out infinite;
     background-size: 400% 400%;
 }
 
 .home-content {
-    border: solid #999 5px;
+    border: solid #0f0f0f 5px;
     border-radius: 4%;
     width: 120vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-
     text-align: center;
-    color: #ccc;
+    color: white;
 }
 
 .home-content>h1 {
@@ -110,7 +108,7 @@ body {
     }
 
     50% {
-        background-position: 100% 100%;
+        background-position: 20% 60%;
     }
 
     100% {
