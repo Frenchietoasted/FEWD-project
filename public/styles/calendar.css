@@ -89,7 +89,7 @@ header {
 }
 
 .calendar {
-    /*make the calendar bigger*/
+    /*makes the calendar bigger*/
     transform: scale(1.1);
     background: rgba(0, 0, 0, 0.7);
     border-radius: 20px;
