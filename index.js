@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express()
 const port = 3000
-app.use(express.static("public"))
+app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Without middleware
@@ -29,7 +29,13 @@ app.get('/checklist.ejs', function (req, res) {
     res.render('checklist', { name: 'John Doe' });
 })
 
+app.get('/easter_egg.ejs', function (req, res) {
+
+    // Rendering home.ejs page
+    res.render('easter_egg', { name: 'John Doe' });
+})
+
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Websites being hosted on http://localhost:${port}`)
 })
 

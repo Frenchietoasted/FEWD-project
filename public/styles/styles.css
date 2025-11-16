@@ -112,12 +112,23 @@ input::placeholder {
   }
 
   50% {
-    background-position: 20% 60%;
+    background-position: 100% 60%;
   }
 
   100% {
     background-position: 50% 50%;
   }
 }
+
+/*this should align with the letter u in "What would you like to get into:" */
+.ultraU {
+  width: 10px;
+  position: relative;
+  display: inline-block;
+  right: 187.3px;
+  transform: scale(1.2);
+  opacity: 0;
+}
+
 
 /*Home page CSS end*/

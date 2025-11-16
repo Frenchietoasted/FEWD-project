@@ -5,9 +5,39 @@ body {
   background-color: black;
   color: white;
 }
+
 input::placeholder {
   font-family: "Stack Sans Notch", sans-serif;
 }
+
+#checklist-body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0f0f0f, #111, #4f1e21);
+  animation: gradient 10s alternate ease-in-out infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 60%;
+  }
+
+  100% {
+    background-position: 50% 60%;
+  }
+}
+
+
 /*checklist css start*/
 .checklist-body {
   margin: 0;
@@ -21,16 +51,18 @@ input::placeholder {
   justify-content: start;
 }
 
-.checklist-body > h1 {
+.checklist-body>h1 {
   font-size: 3.5rem;
 }
-.checklist-body > h2 {
+
+.checklist-body>h2 {
   border: solid red;
   border-width: 0 0 2px 0;
   font-size: 2.2rem;
   margin-bottom: 20px;
 }
-.checklist-content > ul {
+
+.checklist-content>ul {
   list-style: none;
   margin-top: 10vh;
   padding: 0;
@@ -40,7 +72,7 @@ input::placeholder {
   overflow: visible;
 }
 
-.checklist-content > ul > li {
+.checklist-content>ul>li {
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -54,7 +86,7 @@ input::placeholder {
   transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
 }
 
-.checklist-content > ul > li:hover {
+.checklist-content>ul>li:hover {
   color: black;
   box-shadow: 10px 5px 5px white;
   border-color: transparent;
@@ -103,11 +135,13 @@ input::placeholder {
 .border-change {
   border-color: white;
 }
-.checklist-content > ul > li.strike {
+
+.checklist-content>ul>li.strike {
   text-decoration: line-through;
   border-color: black;
 }
-.checklist-content > ul > li.strike:hover {
+
+.checklist-content>ul>li.strike:hover {
   color: red;
   box-shadow: 10px 5px 5px white;
   border-color: transparent;
@@ -121,6 +155,7 @@ input::placeholder {
   justify-content: start;
   align-items: center;
 }
+
 #newTask {
   height: 2.5rem;
   padding: 0;
@@ -132,11 +167,13 @@ input::placeholder {
   transition: background-color 0.2s;
   margin-bottom: 20px;
 }
+
 #newTask:focus {
   outline: none;
   border-color: red;
 }
-.new-thing > button {
+
+.new-thing>button {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -153,19 +190,20 @@ input::placeholder {
   height: 30px;
   fill: red;
   rotate: 0deg;
-  transform:scale(1.2);
+  transform: scale(1.2);
   transition: fill 0.2s, rotate 0.4s;
 }
+
 .plus:hover {
   fill: white;
   rotate: 90deg;
 }
 
-.checklist-body > header {
+.checklist-body>header {
   position: absolute;
   left: 10%;
   top: 5%;
-  width: calc(20vm+20vh);
+  width: calc(20vw+20vh);
   border: solid white;
   color: white;
   padding: 0.5rem 1.1rem;
@@ -173,7 +211,8 @@ input::placeholder {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-.checklist-body > header > button {
+
+.checklist-body>header>button {
   background-color: transparent;
   border: none;
   font-size: 1.6rem;
@@ -181,6 +220,7 @@ input::placeholder {
   cursor: pointer;
   transition: color 0.2s;
 }
+
 .arrow {
   width: 20px;
   height: 20px;
@@ -188,13 +228,16 @@ input::placeholder {
   transition: fill 0.2s;
 }
 
-.checklist-body > header:hover {
+.checklist-body>header:hover {
   button {
     color: black;
+
     .arrow {
       fill: black;
     }
   }
+
   background-color: white;
 }
+
 /*checklist css end*/
