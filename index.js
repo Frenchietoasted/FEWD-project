@@ -4,38 +4,38 @@ const port = 3000
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-// Without middleware
 app.get('/', function (req, res) {
 
     // Rendering home.ejs page
-    res.render('index', { name: 'John Doe' });
+    res.render('index');
 })
 
-app.get('/calendar.ejs', function (req, res) {
+app.get('/calendar', function (req, res) {
 
     // Rendering home.ejs page
-    res.render('calendar', { name: 'John Me' });
+    res.render('calendar');
 })
 
-app.get('/timer.ejs', function (req, res) {
+app.get('/timer', function (req, res) {
 
-    // Rendering home.ejs page
-    res.render('timer', { name: 'John Doe' });
+    // Rendering timer.ejs page
+    res.render('timer');
 })
 
-app.get('/checklist.ejs', function (req, res) {
+app.get('/checklist', function (req, res) {
 
     // Rendering home.ejs page
-    res.render('checklist', { name: 'John Doe' });
+    res.render('checklist');
 })
 
-app.get('/easter_egg.ejs', function (req, res) {
+app.get('/easter_egg', function (req, res) {
 
-    // Rendering home.ejs page
+    // Rendering easter_egg.ejs page
     res.render('easter_egg', { name: 'John Doe' });
 })
 
 app.listen(port, () => {
     console.log(`Websites being hosted on http://localhost:${port}`)
 })
+
 

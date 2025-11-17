@@ -25,7 +25,7 @@ input::placeholder {
 }
 
 .home-content {
-  border: solid #0f0f0f 5px;
+  border: solid #ccc 5px;
   border-radius: 4%;
   width: 120vh;
   display: flex;

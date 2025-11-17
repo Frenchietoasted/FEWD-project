@@ -1,14 +1,50 @@
-<!DOCTYPE html>
+<!-- index.html -->
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>7‑Segment Digital Timer</title>
+    <link rel="stylesheet" href="/styles/timer.css">
 </head>
 
 <body>
-    Timer stuff here
+    <main class="wrap">
+        <h1>7‑Segment Digital Timer</h1>
+
+        <section class="display-area">
+            <div id="display" class="display">
+                <!-- 4 digits: MM:SS (d0 d1 : d2 d3) -->
+                <div class="digit" id="d0"></div>
+                <div class="digit" id="d1"></div>
+
+                <div class="colon" id="colon">
+                    <div class="dot top"></div>
+                    <div class="dot bottom"></div>
+                </div>
+
+                <div class="digit" id="d2"></div>
+                <div class="digit" id="d3"></div>
+            </div>
+        </section>
+
+        <section class="controls">
+            <div class="setters">
+                <label>Minutes <input id="minutesInput" type="number" min="0" max="99" value="0"></label>
+                <label>Seconds <input id="secondsInput" type="number" min="0" max="59" value="30"></label>
+                <button id="setBtn" type="button">Set</button>
+            </div>
+
+            <div class="buttons">
+                <button id="startBtn">Start</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="/scripts/timer.js"></script>
 </body>
 
 </html>
