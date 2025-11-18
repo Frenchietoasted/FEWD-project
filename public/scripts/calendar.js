@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         calendarDays.innerHTML = '';
 
         const firstDayIndex = new Date(year, month, 1).getDay();
+        console.log(firstDayIndex);
         const daysInMonth = new Date(year, month + 1, null).getDate();
 
         // fill leading blanks
@@ -69,12 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // go back a month and re-render the calendar
     prevBtn.addEventListener('click', () => {
+        if (inputEvent.style.display == 'block') { alert('Finish entering the current event first!'); return; }
         current.setMonth(current.getMonth() - 1);
         renderMonth(current);
     });
 
     // go forward a month and re-render the calendar 
     nextBtn.addEventListener('click', () => {
+        if (inputEvent.style.display == 'block') { alert('Finish entering the current event first!'); return; }
         current.setMonth(current.getMonth() + 1);
         renderMonth(current);
     });
