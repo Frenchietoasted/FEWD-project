@@ -5,9 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultrakill</title>
-    <link rel="preload" href="https://www.gamenora.com/embed/ultrakill-prelude" as="iframe">
+    <link rel="preload" href="https://www.gamenora.com/embed/ultrakill-prelude" as="document">
     <link rel="stylesheet" href="/styles/ultra.css">
+    <link rel="icon" href="/images/hellyea.png" type="image/png">
 </head>
+
+<script>
+    // prevents the user from accidentally closing the tab
+    window.addEventListener("beforeunload", function (e) {
+        e.cancelBubble = true;
+        e.preventDefault();
+        e.returnValue = '';
+    });
+</script>
+
 
 <body>
     <iframe id="ultrakill-frame" src="https://www.gamenora.com/embed/ultrakill-prelude" frameborder="0" marginheight="0"
