@@ -130,5 +130,16 @@ input::placeholder {
   opacity: 0;
 }
 
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
 
 /*Home page CSS end*/
