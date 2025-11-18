@@ -27,3 +27,23 @@ document.querySelectorAll('.parallax').forEach(layer => {
         onPointerLeave();
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const audio = document.getElementById('ultratime');
+    audio.volume = 0.2;
+    audio.pause();
+    //play audio when hovering over the leter U in "What would you like to get into:"
+    const uLetter = document.querySelector('.ultraU');
+    uLetter.addEventListener('mouseenter', () => {
+        audio.play();
+        uLetter.style.cursor = 'pointer';
+        uLetter.style.transition = 'opacity 15s';
+        uLetter.style.opacity = '1';
+    });
+    uLetter.addEventListener('mouseleave', () => {
+        audio.pause();
+        audio.currentTime = 0;
+        uLetter.style.opacity = '0';
+        uLetter.style.transition = '';
+    });
+});

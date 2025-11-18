@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     var current = new Date();
 
     // renders the weekday headers (sun mon tue ...)
-
     function renderWeekdays() {
         calendarWeekdays.innerHTML = '';
         weekdays.forEach(d => {
@@ -56,7 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
                 cell.classList.add('today');
             }
+            // check for saved events in localStorage
+            const timing = year + (month + 1).toString() + d;
+            const savedEvent = localStorage.getItem('event_' + timing);
 
+            if (savedEvent) {
+                cell.appendChild(createEventBubble(savedEvent));
+                cell.classList.add('event');
+            }
             calendarDays.appendChild(cell);
         }
     }
@@ -73,32 +79,49 @@ document.addEventListener('DOMContentLoaded', () => {
         renderMonth(current);
     });
 
+
+    function createEventBubble(text) {
+        const eventBubble = document.createElement('div');
+        eventBubble.className = 'event_bubble';
+        eventBubble.textContent = text;
+        return eventBubble;
+    }
+
+    let timing = '';
+
     function userEvent(day) {
         if (inputEvent.style.display == 'block') { alert('Finish entering the current event first!'); return 1; }
         inputEvent.style.display = 'block';
         inputEvent.focus();
         inputEvent.value = '';
-
         inputEvent.onkeydown = (e) => {
             if (e.key === 'Enter') {
                 const eventText = inputEvent.value.trim();
-                if (eventText) {
-                    const eventBubble = document.createElement('div');
-                    eventBubble.className = 'event_bubble';
-                    eventBubble.textContent = eventText;
-                    day.appendChild(eventBubble);
+                // throw an alert if the first character is a number
+                if (!eventText) {
+                    alert('Event cannot be empty!');
+                    return;
                 }
+                else if (eventText.charAt(0).match(/\d/)) {
+                    alert('Event cannot start with a number!');
+                    return;
+                } else {
+                    day.appendChild(createEventBubble(eventText));
+                }
+                localStorage.setItem('event_' + timing, eventText);
                 inputEvent.style.display = 'none';
             }
         };
         return 0;
     }
 
+
     calendarDays.addEventListener('click', (day) => {
         if (day.target.classList.contains('blank') || day.target.classList.contains('calendar_grid')) return;
-
+        timing = current.getFullYear() + (current.getMonth() + 1).toString() + day.target.textContent.match(/\d+/g)[0];
         if (day.target.classList.contains('event')) {
             day.target.querySelector('.event_bubble')?.remove();
+            localStorage.removeItem('event_' + timing);
         } else {
             if (userEvent(day.target)) return;
         }

@@ -1,0 +1,241 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Stack Sans Notch", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0f0f0f, #111, #4f1e21);
+  animation: gradient 10s alternate ease-in-out infinite;
+  background-size: 400% 400%;
+  color: white;
+}
+
+h2 {
+  border: solid red;
+  border-width: 0 0 2px 0;
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 60%;
+  }
+
+  100% {
+    background-position: 50% 60%;
+  }
+}
+
+header {
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    width: calc(20vw+20vh);
+    border: solid white;
+    color: white;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: white;
+
+        & button {
+            color: black;
+
+            & .arrow {
+                fill: black;
+                transform: translateX(-5px) scale(1.2);
+            }
+        }
+
+    }
+}
+
+.back_button {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.back-button button {
+    justify-content: center;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    transition: fill 0.2s, transform 0.4s;
+    transform: scale(1.2);
+}
+
+/* Timer styles */
+.base-timer {
+  position: relative;
+  height: 300px;
+  width: 300px;
+}
+
+/* Removes SVG styling that would hide the time label */
+.base-timer-circle {
+  fill: none;
+  stroke: none;
+}
+
+/* The SVG path that displays the timer's progress */
+.base-timer-path-elapsed {
+  stroke-width: 7px;
+  stroke: transparent;
+}
+
+.base-timer-label {
+  /* Size should match the parent container */
+  width: 300px;
+  height: 300px;
+
+  /* Keep the label aligned to the top */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* Create a flexible box that centers content vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sort of an arbitrary number; adjust to your liking */
+  font-size: 48px;
+}
+
+.base-timer-path-remaining {
+  /* Just as thick as the original ring */
+  stroke-width: 7px;
+
+  /* Rounds the line endings to create a seamless circle */
+  stroke-linecap: round;
+
+  /* Makes sure the animation starts at the top of the circle */
+  transform: rotate(90deg);
+  transform-origin: center;
+
+  /* One second aligns with the speed of the countdown timer */
+  transition: 1s linear all;
+
+  /* Allows the ring to change color when the color value updates */
+  stroke: currentColor;
+}
+
+.base-timer-svg {
+  /* Flips the svg and makes the animation to move left-to-right */
+  transform: scaleX(-1);
+}
+
+.white {
+  color: white;
+}
+
+.light-red{
+  color: #ee8888;
+}
+
+.red {
+  color: red;
+}
+
+.set-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+.time-inputs {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding:10px;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: white;
+  font-family: "Stack Sans Notch", sans-serif;
+}
+
+.input-group input {
+  width: 50px;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  text-align: center;
+  background: #222;
+  color: white;
+  font-family: "Stack Sans Notch", sans-serif;
+}
+
+
+
+.button-controls>button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
+.play,.pause,.reset{
+  position: static;
+  top: 5%;
+  left: 5%;
+  width: 30px;
+  height: 30px;
+  fill: red;
+  rotate: 0deg;
+  transform: scale(1.2);
+  transition: fill 0.2s, rotate 0.4s;
+}
+button:disabled{
+  opacity: 0.2;
+}
+.button-controls{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color:transparent;
+}
