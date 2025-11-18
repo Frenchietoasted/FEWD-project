@@ -1,50 +1,86 @@
 <!-- index.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>7‑Segment Digital Timer</title>
-    <link rel="stylesheet" href="/styles/timer.css">
-</head>
+    <title>Timer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/timer.css" />
+  </head>
 
-<body>
-    <main class="wrap">
-        <h1>7‑Segment Digital Timer</h1>
+  <body>
+    <header>
+        <div class="back-button">
+            <button onclick="location.href='/'">
+                <svg xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                </svg>
+                home.
+            </button>
+        </div>
+    </header>
+    <div class="base-timer">
+      <svg
+        class="base-timer-svg"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g class="base-timer-circle">
+            <circle class="base-timer-path-elapsed" cx="50" cy="50" r="45"></circle>
+                <path
+                    id="base-timer-path-remaining"
+                    stroke-dasharray="283"
+                    class="base-timer-path-remaining"
+                    d="
+                    M 50, 50
+                    m -45, 0
+                    a 45,45 0 1,0 90,0
+                    a 45,45 0 1,0 -90,0
+                    "
+                ></path>
+        </g>
+      </svg>
+      <span id="base-timer-label" class="base-timer-label"> </span>
+    </div>
+    <div class="controls">
+        <h2>set time.</h2>
+        <div class="set-time">
+            <div class="time-inputs">
+              <div class="input-group">
+                <label for="minutes">Min</label>
+                <input type="number" id="minutes" value="0" min="0">
+              </div>
 
-        <section class="display-area">
-            <div id="display" class="display">
-                <!-- 4 digits: MM:SS (d0 d1 : d2 d3) -->
-                <div class="digit" id="d0"></div>
-                <div class="digit" id="d1"></div>
-
-                <div class="colon" id="colon">
-                    <div class="dot top"></div>
-                    <div class="dot bottom"></div>
-                </div>
-
-                <div class="digit" id="d2"></div>
-                <div class="digit" id="d3"></div>
+              <div class="input-group">
+                <label for="seconds">Sec</label>
+                <input type="number" id="seconds" value="30" min="0">
+              </div>
             </div>
-        </section>
-
-        <section class="controls">
-            <div class="setters">
-                <label>Minutes <input id="minutesInput" type="number" min="0" max="99" value="0"></label>
-                <label>Seconds <input id="secondsInput" type="number" min="0" max="59" value="30"></label>
-                <button id="setBtn" type="button">Set</button>
+            <div class="button-controls">
+              <button onclick="startTimer(this)"  id="start">
+                  <svg xmlns="http://www.w3.org/2000/svg"class="play" viewBox="0 0 16 16">
+                    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
+                  </svg>
+              </button>
+              <button onclick="pauseTimer(this)" id="pause">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="pause" viewBox="0 0 16 16">
+                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
+                  </svg>
+              </button>
+              <button onclick="resetTimer(this)" id="reset">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="reset" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466"/>
+                  </svg>
+              </button>
             </div>
-
-            <div class="buttons">
-                <button id="startBtn">Start</button>
-                <button id="pauseBtn">Pause</button>
-                <button id="resetBtn">Reset</button>
-            </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
     <script src="/scripts/timer.js"></script>
-</body>
-
+  </body>
 </html>

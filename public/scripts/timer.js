@@ -1,141 +1,167 @@
 
-// ===================== script.js =====================
-// Save this as script.js
-(function () {
-    // Digit mapping: segments are named a,b,c,d,e,f,g (in that order)
-    const DIGIT_MAP = [
-        [1, 1, 1, 1, 1, 1, 0], //0
-        [0, 1, 1, 0, 0, 0, 0], //1
-        [1, 1, 0, 1, 1, 0, 1], //2
-        [1, 1, 1, 1, 0, 0, 1], //3
-        [0, 1, 1, 0, 0, 1, 1], //4
-        [1, 0, 1, 1, 0, 1, 1], //5
-        [1, 0, 1, 1, 1, 1, 1], //6
-        [1, 1, 1, 0, 0, 0, 0], //7
-        [1, 1, 1, 1, 1, 1, 1], //8
-        [1, 1, 1, 1, 0, 1, 1]  //9
-    ];
+var TIME_LIMIT;
+var warningThreshold,alertThreshold;
+// Initially, no time has passed, but this will count up
+// and subtract from the TIME_LIMIT
+var timePassed = 0;
+var timeLeft = TIME_LIMIT;
+var timerInterval = null;
 
-    // SVG segment polygons for a 7-seg digit sized to viewBox 0 0 100 200
-    // Each polygon is placed roughly where the segment should be.
-    // updated to symmetric coordinates so left/right segments match visually
-    const SEGMENTS_SVG = {
-        // top bar
-        a: '<polygon class="segment" points="14,18 86,18 72,34 28,34" />',
-        // right top (stop above middle to leave a gap)
-        b: '<polygon class="segment" points="72,34 86,18 86,96 72,110 72,34" />',
-        // right bottom (start below middle)
-        c: '<polygon class="segment" points="72,110 86,96 86,186 72,170 72,110" />',
-        // bottom bar
-        d: '<polygon class="segment" points="14,186 86,186 72,170 28,170" />',
-        // left bottom (start below middle)
-        e: '<polygon class="segment" points="28,110 14,96 14,186 28,170 28,110" />',
-        // left top (stop above middle to leave a gap)
-        f: '<polygon class="segment" points="28,34 14,18 14,96 28,110 28,34" />',
-        // middle bar
-        g: '<polygon class="segment" points="28,96 72,96 72,110 28,110" />'
-    };
+var start;
+var pause=false;
 
-    function makeDigitSVG() {
-        const keys = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-        return `<svg viewBox="0 0 100 208" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">${keys.map(k => SEGMENTS_SVG[k]).join('')}</svg>`;
-    }
-    // Render digits
-    document.querySelectorAll('.digit').forEach(el => el.innerHTML = makeDigitSVG());
+function getInputTime() {
+  const min = parseInt(document.getElementById("minutes").value) || 0;
+  const sec = parseInt(document.getElementById("seconds").value) || 0;
 
-    function setDigit(id, num) {
-        num = Math.max(0, Math.min(9, Math.floor(num)));
-        const container = document.getElementById(id);
-        if (!container) return;
-        const segs = container.querySelectorAll('.segment');
-        const map = DIGIT_MAP[num];
-        segs.forEach((s, idx) => {
-            if (map[idx]) s.classList.add('on'); else s.classList.remove('on');
-        });
-    }
+  TIME_LIMIT = min * 60 + sec;
+  // Warning occurs at 10s
+  warningThreshold = 0.5*TIME_LIMIT;
+  // Alert occurs at 5s
+  alertThreshold = 0.25*TIME_LIMIT;
+}
 
-    // Controls and state
-    const minutesInput = document.getElementById('minutesInput');
-    const secondsInput = document.getElementById('secondsInput');
-    const setBtn = document.getElementById('setBtn');
-    const startBtn = document.getElementById('startBtn');
-    const pauseBtn = document.getElementById('pauseBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const colon = document.getElementById('colon');
-    const display = document.getElementById('display');
+function formatTime(time) {
+  // The largest round integer less than or equal to the result of time divided being by 60.
+  const minutes = Math.floor(time / 60);
+  
+  // Seconds are the remainder of the time divided by 60 (modulus operator)
+  let seconds = time % 60;
+  
+  // If the value of seconds is less than 10, then display seconds with a leading zero
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
 
-    let totalSeconds = parseInt(minutesInput.value || 0) * 60 + parseInt(secondsInput.value || 0);
-    let initialSeconds = totalSeconds;
-    let interval = null;
-    let running = false;
+  // The output in MM:SS format
+  return `${minutes}:${seconds}`;
+}
 
-    function renderTime(seconds) {
-        seconds = Math.max(0, Math.floor(seconds));
-        const mm = Math.floor(seconds / 60);
-        const ss = seconds % 60;
-        const d0 = Math.floor(mm / 10) % 10;
-        const d1 = mm % 10;
-        const d2 = Math.floor(ss / 10);
-        const d3 = ss % 10;
-        setDigit('d0', d0);
-        setDigit('d1', d1);
-        setDigit('d2', d2);
-        setDigit('d3', d3);
-    }
+// Divides time left by the defined time limit.
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+}
+    
+// Update the dasharray value as time passes, starting with 283
+function setCircleDashArray() {
+    const circleDasharray = `${(calculateTimeFraction() * 283).toFixed(0)} 283`;
+    document.getElementById("base-timer-path-remaining")
+        .setAttribute("stroke-dasharray", circleDasharray);
+    setRemainingPathColor(timeLeft)
+}
 
-    function tick() {
-        if (totalSeconds <= 0) {
-            stop(true);
-            return;
-        }
-        totalSeconds--;
-        renderTime(totalSeconds);
+function startTimer(button) {
+  if (timeLeft <= 0 || pause === false && timePassed === 0) {
+    TIME_LIMIT = getInputTime();
+    timePassed = 0;
+    timeLeft = TIME_LIMIT;
+  }
+
+  // Defensive: stop any existing timer
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  getInputTime();
+
+  const startBtn = button;
+  const pauseBtn = document.getElementById("pause");
+
+  startBtn.disabled = true;
+  pauseBtn.disabled = false;
+  pause = false;
+
+  timerInterval = setInterval(() => {
+
+   
+
+    if (pause) {
+      clearInterval(timerInterval);
+      return;
     }
 
-    function start() {
-        if (running) return;
-        if (totalSeconds <= 0) return;
-        running = true;
-        colon.classList.add('blink');
-        interval = setInterval(tick, 1000);
-    }
-    function pause() {
-        running = false;
-        colon.classList.remove('blink');
-        clearInterval(interval); interval = null;
-    }
-    function stop(timeUp = false) {
-        pause();
-        running = false;
-        colon.classList.remove('blink');
-        if (timeUp) {
-            // flash display
-            display.classList.add('flash');
-            setTimeout(() => display.classList.remove('flash'), 3000);
-        }
+    timePassed++;
+    timeLeft = TIME_LIMIT - timePassed;
+
+    if (timeLeft == 0) {
+      clearInterval(timerInterval);
+      document.getElementById("base-timer-label").innerHTML = "0:00";
+      setCircleDashArray();
+      return;
     }
 
-    function reset() {
-        pause();
-        totalSeconds = initialSeconds;
-        renderTime(totalSeconds);
-    }
+    document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+    setCircleDashArray();
 
-    // Buttons
-    setBtn.addEventListener('click', () => {
-        const m = Math.max(0, Math.min(99, parseInt(minutesInput.value || 0)));
-        let s = Math.max(0, Math.min(59, parseInt(secondsInput.value || 0)));
-        minutesInput.value = m; secondsInput.value = s;
-        totalSeconds = m * 60 + s;
-        initialSeconds = totalSeconds;
-        renderTime(totalSeconds);
-    });
+  }, 1000);
+}
 
-    startBtn.addEventListener('click', start);
-    pauseBtn.addEventListener('click', pause);
-    resetBtn.addEventListener('click', reset);
+function pauseTimer(button) {
+  pause = true;
+  button.disabled = true;
 
-    // initialize
-    renderTime(totalSeconds);
+  const startBtn = document.getElementById("start");
+  startBtn.disabled = false;
+}
 
-})();
+function resetTimer(button) {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  timePassed = 0;
+  getInputTime();
+  timeLeft = TIME_LIMIT;
+  document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+  setCircleDashArray();
+  const startBtn = document.getElementById("start");
+  const pauseBtn = document.getElementById("pause");
+
+  startBtn.disabled = false;
+  pauseBtn.disabled = true;
+}
+
+const colorCodes = {
+  info: {
+    color: "white"
+  },
+  warning: {
+    color: "light-red",
+    threshold: warningThreshold
+  },
+  alert: {
+    color: "red",
+    threshold: alertThreshold
+  }
+};
+
+function setRemainingPathColor(timeLeft) {
+  const { alert, warning, info } = colorCodes;
+  
+  // If the remaining time is less than or equal to 5, remove the "warning" class and apply the "alert" class.
+  if (timeLeft <= alertThreshold) {
+    document.getElementById("base-timer-path-remaining")
+      .classList.remove(warning.color);
+    document.getElementById("base-timer-path-remaining")
+      .classList.add(alert.color);
+
+  // If the remaining time is less than or equal to 10, remove the base color and apply the "warning" class.
+  } else if (timeLeft <= warningThreshold) {
+    document.getElementById("base-timer-path-remaining")
+      .classList.remove(info.color);
+    document.getElementById("base-timer-path-remaining")
+      .classList.add(warning.color);
+  } else {
+    document.getElementById("base-timer-path-remaining")
+      .classList.remove(warning.color);
+    document.getElementById("base-timer-path-remaining")
+      .classList.remove(alert.color);
+    document.getElementById("base-timer-path-remaining")
+      .classList.add(info.color);
+  }
+}
+
+
